@@ -1,11 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+// Modules
+import cities from './modules/cities'
+import player from './modules/player'
+import allPlayers from './modules/all-players'
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store(wrap({
   strict: process.env.NODE_ENV !== 'production',
+  modules: {
+    cities,
+    player,
+    allPlayers,
+  },
 }));
+
 
 function wrap(mod) {
   const wrapped = Object.assign({
@@ -49,7 +60,7 @@ export function bindState(namespace, items) {
   }, {});
 }
 
-export function setState(state, { key, data }) {  
+function setState(state, { key, data }) {  
   let stateCopy = state;
   key.split('.').reduce((a, b, i, arr) => {
     if (i === arr.length - 1) {

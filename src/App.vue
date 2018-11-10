@@ -27,8 +27,8 @@ export default {
     };
   },
   mounted() {
-    this.$socket.open();
-    console.log(this.$socket);
+    const SOCKET = this.$socket.open();
+    // console.log(SOCKET);
     
     this.$socket.on('connect', this.handleConnect)
     this.$socket.on('messageRecieved', this.addToMessages)
@@ -37,7 +37,7 @@ export default {
     handleConnect(data) {
      
       if (data) {
-         console.log('CONNECTED:', this.$socket);
+        //  console.log('CONNECTED:', this.$socket);
         this.$socket.emit('join', { room: 'theRoom' })
       }
     },
