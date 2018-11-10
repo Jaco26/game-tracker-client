@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 
 export default {
   install(Vue, { store } ) {
-    const rootUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:5000' : '';
+    const rootUrl = process.env.NODE_ENV !== 'production' ? 'http://172.16.0.2:5000' : '';
     const socket = io(`${rootUrl}`, {
       autoConnect: false,
     });

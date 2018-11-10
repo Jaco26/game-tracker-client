@@ -9,7 +9,7 @@
       <div class="row">
         <div class="f1 t-center">
           <ul style="list-style: none;">
-            <li v-for="(msg, i) in messages" :key="i">{{msg.message}}</li>
+            <li v-for="(msg, i) in messageList" :key="i">{{msg}}</li>
           </ul>
         </div>
       </div>
@@ -24,20 +24,25 @@ export default {
   data() {
     return {
       newMessage: '',
-    };
+    }
   },
-  async mounted() {
-    await this.$socket.open();
+  mounted() {    
+    this.$socket.open();
     this.joinRoom({ room: 'myRoom' });
+    console.log(this.$store);
+    
   },
   computed: {
     ...bindState('messages', [
-      'messages',
+      'messageList',
     ]),
   },
   methods: {
+    sendMessage() {
+      this.$store.dispatch('messages/socket_newMessage', this.newMessage);
+      this.newMessage = '';
+    },
     ...mapActions('messages', {
-      sendMessage: 'socket_newMessage',
       joinRoom: 'socket_joinRoom',
     })
   }
