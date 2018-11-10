@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <form @keydown.enter="sendMessage" @submit.prevent="sendMessage">
+    <form @submit.prevent="sendMessage(newMessage)">
       <div class="row">
         <div class="f1 t-center">
           <input type="text" v-model="newMessage">
@@ -19,39 +19,27 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { bindState } from '@/store';
 export default {
   data() {
     return {
       newMessage: '',
-      messages: [],
     };
   },
-  mounted() {
-    const SOCKET = this.$socket.open();
-    // console.log(SOCKET);
-    
-    this.$socket.on('connect', this.handleConnect)
-    this.$socket.on('messageRecieved', this.addToMessages)
+  async mounted() {
+    await this.$socket.open();
+    this.joinRoom({ room: 'myRoom' });
+  },
+  computed: {
+    ...bindState('messages', [
+      'messages',
+    ]),
   },
   methods: {
-    handleConnect(data) {
-     
-      if (data) {
-        //  console.log('CONNECTED:', this.$socket);
-        this.$socket.emit('join', { room: 'theRoom' })
-      }
-    },
-    addToMessages(msg) {
-      console.log(msg);
-      
-      this.messages.push(msg)
-    },
-    sendMessage() {
-      if (this.newMessage.trim().length) {        
-        this.$socket.emit('newMessage', { message: this.newMessage });
-        this.newMessage = '';
-      }
-    }
+    ...mapActions('messages', {
+      sendMessage: 'socket_newMessage',
+      joinRoom: 'socket_joinRoom',
+    })
   }
 
 } 

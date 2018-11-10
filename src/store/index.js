@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import cities from './modules/cities'
 import player from './modules/player'
 import allPlayers from './modules/all-players'
+import messages from './modules/messages'
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export const store = new Vuex.Store(wrap({
     cities,
     player,
     allPlayers,
+    messages,
   },
 }));
 

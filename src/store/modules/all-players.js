@@ -1,7 +1,7 @@
 const somethingTijng = {
   actions: {
     socket_anotherOne(ctx, payload) {
-
+      
     }
   }
 }
@@ -14,8 +14,12 @@ export default {
     somethingTijng,
   },
   actions: {
-    socket_sayHi(context, payload) {
+    socket_jsob() {
 
+    },
+    socket_sayHi(context, payload) {
+      // console.log('Hi');
+      
     }
   }
 }
