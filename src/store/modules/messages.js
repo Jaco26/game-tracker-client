@@ -1,10 +1,11 @@
 export default {
   state: {
     messageList: [],
+    newMessage: ''
   },
   mutations: {
     SOCKET_connected(state, payload) {
-      console.log('CONNECTED TO SERVER', payload);
+      state.messageList = payload;
     },
     SOCKET_messageRecieved(state, payload) {      
       state.messageList.push(payload)
@@ -18,7 +19,10 @@ export default {
     }
   },
   actions: {
-    socket_newMessage() {},
+    socket_newMessage(ctx, payload) {
+      console.log(payload);
+      
+    },
     socket_joinRoom() {},
   }
 

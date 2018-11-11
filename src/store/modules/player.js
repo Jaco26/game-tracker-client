@@ -1,8 +1,9 @@
 
 export default {
   state: {
-    name: 'Jacob',
+    name: '',
     position: null,
-    role: 'Medic'
-  }
+    role: '',
+    loggedIn: true,
+  },
 }

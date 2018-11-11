@@ -21,12 +21,10 @@ export const store = new Vuex.Store(wrap({
 
 
 function wrap(mod) {
-  const wrapped = Object.assign({
+  const wrapped = mergeToPreserve({
     namespaced: true,
     state: {},
-    mutations: {
-      setState,
-    },
+    mutations: {},
     actions: {},
     getters: {},
     modules: {},
@@ -72,4 +70,14 @@ function setState(state, { key, data }) {
     }
     return stateCopy;
   }, stateCopy);
+}
+
+
+function mergeToPreserve(target, source) {
+  if (source.mutations) {
+    source.mutations['setState'] = setState;
+  } else {
+    source.mutations = { setState };
+  }
+  return Object.assign(target, source);
 }
