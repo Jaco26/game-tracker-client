@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // Modules
+import setup from './modules/setup';
 import user from './modules/user';
-import roles from './modules/roles';
 import game from './modules/game';
 
 Vue.use(Vuex);
@@ -11,8 +11,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store(wrap({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
+    setup,
     user,
-    roles,
     game,
   },
 }));

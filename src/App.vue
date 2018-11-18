@@ -1,5 +1,6 @@
 <template>
-  <b-container class="align-items-center" fluid id="app">
+  <b-container class="align-items-center px-0" fluid  id="app">
+    <app-navbar></app-navbar>
     <transition name="route-fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -9,8 +10,12 @@
 <script>
 import { mapActions } from 'vuex';
 import { bindState } from '@/store';
+// components
+import appNavbar from '@/components/Navbar'
 export default {
-
+  components: {
+    appNavbar,
+  }
 } 
 </script>
 

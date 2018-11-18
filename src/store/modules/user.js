@@ -3,6 +3,7 @@ export default {
     id: null,
     name: '',
     roleId: null,
+    gameId: null,
   },
 
 }
