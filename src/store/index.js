@@ -2,20 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // Modules
-import cities from './modules/cities'
-import player from './modules/player'
-import allPlayers from './modules/all-players'
-import messages from './modules/messages'
+import user from './modules/user';
+import roles from './modules/roles';
+import game from './modules/game';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store(wrap({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
-    cities,
-    player,
-    allPlayers,
-    messages,
+    user,
+    roles,
+    game,
   },
 }));
 

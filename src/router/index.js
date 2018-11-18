@@ -29,19 +29,19 @@ const router = new Router({
 });
 
 
-router.beforeEach((to, from, next) => {
-  console.log(to, from);
-  if (to.name === 'login') {
-    next();
-  } else if (store.state.player.loggedIn) {
-    next();
-  } else {
-    next({
-      name: 'login',
-      replace: true,
-    });
-  }
-  next();
-});
+// router.beforeEach((to, from, next) => {
+//   // console.log(to, from);
+//   if (to.name === 'login') {
+//     next();
+//   } else if (store.state.player.joinedGame) {
+//     next();
+//   } else {
+//     next({
+//       name: 'login',
+//       replace: true,
+//     });
+//   }
+//   next();
+// });
 
 export default router;
