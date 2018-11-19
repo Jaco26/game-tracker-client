@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import { store } from '../store'
 import Router from 'vue-router'
+
+import Admin from '@/views/Admin/index'
 import Login from '@/views/Login/index'
 import Home from '@/views/Home/index'
 import PageNotFound from '@/views/PageNotFound'
@@ -22,6 +24,11 @@ const router = new Router({
       component: Login,
     },
     {
+      path: '/super-secret/admin',
+      name: 'admin',
+      component: Admin,
+    },
+    {
       path: '*',
       component: PageNotFound,
     }
@@ -30,7 +37,7 @@ const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-  if (to.name === 'login') {
+  if (to.name === 'login' || to.name === 'admin') {
     next();
   } else if (store.state.user.gameId) {
     next();
