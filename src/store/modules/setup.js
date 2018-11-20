@@ -37,8 +37,16 @@ export default {
         commit('setState', { key: 'newGame', data: '' });
         dispatch('fetchGames');
       } catch (err) {
-        console.log(err);
+        console.log(`There was an error adding ${state.newGame} to games:`, err);
       }
     },
+    async deleteGame({ dispatch }, gameId) {
+      try {
+        await games.delete(gameId);
+        dispatch('fetchGames');
+      } catch (err) {
+        console.log(`There was an error deleting game ${gameId}`, err);
+      }
+    }
   },
 };

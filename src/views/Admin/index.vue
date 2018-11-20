@@ -20,17 +20,8 @@
       </b-col>
     </b-col>
     <b-col cols="12">
-      <b-col cols="8" offset="2">
-        <b-list-group>
-          <b-list-group-item
-            v-for="game in games" 
-            :key="game.id"
-            class="d-flex w-100 justify-content-between pb-0"
-          >
-            <p>{{game.name}}</p>
-            <small>Created: {{game.date_created}}</small>
-          </b-list-group-item>
-        </b-list-group>
+      <b-col cols="12" sm="10" offset-sm="1">
+        <app-game-list></app-game-list>
       </b-col>
     </b-col>
   </b-row>
@@ -38,11 +29,14 @@
 
 <script>
 import { bindState } from '@/store';
+import appGameList from '@/components/GameList';
 export default {
+  components: {
+    appGameList
+  },
   computed: {
     ...bindState('setup', [
       'newGame',
-      'games',
     ]),
   },
   mounted() {

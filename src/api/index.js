@@ -15,6 +15,11 @@ const games = {
       .then(res => res.data)
       .catch(err => err);
   },
+  delete(gameId) {
+    return api.delete(`/game/${gameId}`)
+      .then(res => res)
+      .catch(err => err);
+  },
 }
 
 
