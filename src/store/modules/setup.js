@@ -30,11 +30,12 @@ export default {
         console.log(err);
       }
     },
-    async addGame({ state, dispatch }) {
+    async addGame({ state, dispatch, commit }) {
       try {        
         const game = { name: state.newGame };
         await games.add(game);
-        dispatch('fetchGames')
+        commit('setState', { key: 'newGame', data: '' });
+        dispatch('fetchGames');
       } catch (err) {
         console.log(err);
       }

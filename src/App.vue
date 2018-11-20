@@ -1,5 +1,5 @@
 <template>
-  <b-container class="align-items-center px-0" fluid  id="app">
+  <b-container class="align-items-center px-0" fluid id="app">
     <app-navbar></app-navbar>
     <transition name="route-fade" mode="out-in">
       <router-view></router-view>
@@ -23,15 +23,13 @@ export default {
 <style lang="scss">
 
 html, body {
-  margin: 0;
   height: 100%;
 }
 
 #app {
   background-color: beige;
-  height: 100%;
+  min-height: 100%;
 }
-
 
 .route-fade-enter-active, .route-fade-leave-active {
   transition: opacity .1s;
