@@ -15,7 +15,22 @@ import appNavbar from '@/components/Navbar'
 export default {
   components: {
     appNavbar,
-  }
+  },
+  computed: {
+    ...bindState('setup', [
+      'games',
+      'roles',
+      'players',
+    ]),
+  },
+  methods: {
+    shouldFetch(key) {
+      return this[key].length === 0;
+    }
+  },
+  mounted() {
+    if (this.shouldFetch('games')) this.$store.dispatch('setup/fetchGames');
+  },
 } 
 </script>
 

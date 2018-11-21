@@ -39,9 +39,6 @@ export default {
       'newGame',
     ]),
   },
-  mounted() {
-    this.$store.dispatch('setup/fetchGames')
-  },
   methods: {
     onSubmit() {
       if (this.newGame) {

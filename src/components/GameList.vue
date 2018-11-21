@@ -5,18 +5,28 @@
       :fields="fields"
       :per-page="10"
       :current-page="currentPage"
+      sort-by="date_created"
+      sort-desc
       small
       striped 
       hover
     >
       <template slot="actions" slot-scope="row">
         <b-button 
-          :disabled="$route.name !== 'admin'" 
+          v-if="$route.name === 'admin'"
           @click="deleteGame(row.item.id)" 
-          :variant="$route.name === 'admin' ? 'danger' : ''"
+          variant="danger"
           size="sm"
         > 
           &times;
+        </b-button>
+        <b-button 
+          v-if="$route.name === 'login'"
+          @click="joinGame(row.item.id)" 
+          variant="info"
+          size="sm"
+        > 
+          Join
         </b-button>
       </template>
     </b-table>
@@ -66,8 +76,12 @@ export default {
     }
   },
   methods: {
-    deleteGame(id) {
-      this.$store.dispatch('setup/deleteGame', id);
+    deleteGame(gameId) {
+      this.$store.dispatch('setup/deleteGame', gameId);
+    },
+    joinGame(gameId) {
+      console.log('Hey! Let\'s join game', gameId);
+      
     }
   }
 }
