@@ -31,6 +31,7 @@ export default {
         },
         actions: {
           label: 'Actions',
+          class: 'd-flex justify-content-end'
         },
       },
     };

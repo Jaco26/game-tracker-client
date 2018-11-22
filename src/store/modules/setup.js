@@ -39,14 +39,23 @@ const actions = {
         console.log(`There was an error getting all players`, err);
       }
     },
+    async addPlayer({ commit, dispatch, state }) {
+      try {
+        const player = { name: state.newPlayer };
+        await makeCall('post', '/players', player);
+        commit('setState', { key: 'newPlayer', data: '' });
+        dispatch('fetchPlayers');
+      } catch (err) {
+        console.log(`There was an error adding player`, err);
+      }
+    }
   },
 
   role: {
     async fetchRoles({ commit }) {
       try {
         const result = await makeCall('get', '/roles');
-        console.log('fetch roles result', result);
-        
+        commit('setState', { key: 'roles', data: result });
       } catch (err) {
         console.log(`There was an error getting all roles`, err);
       }
