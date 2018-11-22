@@ -3,11 +3,14 @@
     <b-table
       :items="players"
       :fields="fields"
-      striped
       hover
       sort-by="name"
       small
-    ></b-table>
+    >
+      <template slot="actions" slot-scope="data" class="justify-content-end">
+        <b-button @click="selectPlayer(data.item.id)" variant="info">Select</b-button>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -16,7 +19,7 @@ import { bindState } from '@/store';
 export default {
   computed: {
     ...bindState('setup', [
-      'players'
+      'players',
     ]),
   },
   data() {
@@ -27,10 +30,16 @@ export default {
           label: 'Name',
         },
         actions: {
-          label: 'Booga booga'
+          label: 'Actions',
         },
       },
     };
   },
+  methods: {
+    selectPlayer(playerId) {
+      console.log(`I choose player ${playerId}`);
+      
+    }
+  }
 };
 </script>
