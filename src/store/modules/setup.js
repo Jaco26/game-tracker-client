@@ -1,6 +1,4 @@
-import  makeCall  from '@/api/index'
-// const { games, player, role } = api;
-
+import  { makeCall }  from '@/api/index';
 
 const actions = {
   game: {
@@ -36,8 +34,7 @@ const actions = {
     async fetchPlayers({ commit }) {
       try {
         const result = await makeCall('get', '/players');
-        console.log('fetch players result', result);
-        
+        commit('setState', { key: 'players', data: result });
       } catch (err) {
         console.log(`There was an error getting all players`, err);
       }
