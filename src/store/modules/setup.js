@@ -1,5 +1,61 @@
-import api from '@/api/index'
-const { games } = api;
+import  makeCall  from '@/api/index'
+// const { games, player, role } = api;
+
+
+const actions = {
+  game: {
+    async fetchGames({ commit }) {
+      try {
+        const result = await makeCall('get', '/games');
+        commit('setGames', result.games);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addGame({ state, dispatch, commit }) {
+      try {        
+        const game = { name: state.newGame };
+        await makeCall('post', '/games', game);
+        commit('setState', { key: 'newGame', data: '' });
+        dispatch('fetchGames');
+      } catch (err) {
+        console.log(`There was an error adding ${state.newGame} to games:`, err);
+      }
+    },
+    async deleteGame({ dispatch }, gameId) {
+      try {
+        await makeCall('delete', `/game/${gameId}`);
+        dispatch('fetchGames');
+      } catch (err) {
+        console.log(`There was an error deleting game ${gameId}`, err);
+      }
+    },
+  },
+
+  player: {
+    async fetchPlayers({ commit }) {
+      try {
+        const result = await makeCall('get', '/players');
+        console.log('fetch players result', result);
+        
+      } catch (err) {
+        console.log(`There was an error getting all players`, err);
+      }
+    },
+  },
+
+  role: {
+    async fetchRoles({ commit }) {
+      try {
+        const result = await makeCall('get', '/roles');
+        console.log('fetch roles result', result);
+        
+      } catch (err) {
+        console.log(`There was an error getting all roles`, err);
+      }
+    }
+  }
+}
 
 
 export default {
@@ -22,31 +78,8 @@ export default {
     },
   },
   actions: {
-    async fetchGames({ commit }) {
-      try {
-        const result = await games.getAll();
-        commit('setGames', result.games);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    async addGame({ state, dispatch, commit }) {
-      try {        
-        const game = { name: state.newGame };
-        await games.add(game);
-        commit('setState', { key: 'newGame', data: '' });
-        dispatch('fetchGames');
-      } catch (err) {
-        console.log(`There was an error adding ${state.newGame} to games:`, err);
-      }
-    },
-    async deleteGame({ dispatch }, gameId) {
-      try {
-        await games.delete(gameId);
-        dispatch('fetchGames');
-      } catch (err) {
-        console.log(`There was an error deleting game ${gameId}`, err);
-      }
-    }
+    ...actions.game,
+    ...actions.player,
+    ...actions.role,
   },
 };

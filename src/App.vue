@@ -30,6 +30,8 @@ export default {
   },
   mounted() {
     if (this.shouldFetch('games')) this.$store.dispatch('setup/fetchGames');
+    if (this.shouldFetch('roles')) this.$store.dispatch('setup/fetchRoles');
+    if (this.shouldFetch('players')) this.$store.dispatch('setup/fetchPlayers');
   },
 } 
 </script>
