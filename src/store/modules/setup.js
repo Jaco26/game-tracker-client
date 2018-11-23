@@ -5,6 +5,14 @@ function storeLocal(obj) {
   localStorage.setItem('player', JSON.stringify(obj));
 }
 
+function formatGameDate(game) {
+  const date = new Date(game.date_created);
+  const tzOffset = date.getTimezoneOffset() * 60000;
+  const time = date.getTime();
+  game.date_created = new Date(time - tzOffset).toLocaleString();
+  return game;
+}
+
 const apiActions = {
   game: {
     async fetchGames({ commit }) {
@@ -13,6 +21,14 @@ const apiActions = {
         commit('setGames', result.games);
       } catch (err) {
         console.log(err);
+      }
+    },
+    async fetchGame({ commit }, gameId) {
+      try {
+        const result = await makeCall('get', `/game/${gameId}`);
+        commit('updateGames', result.game)
+      } catch (err) {
+        console.log('There was an error getting game', gameId);
       }
     },
     async addGame({ state, dispatch, commit }) {
@@ -53,7 +69,16 @@ const apiActions = {
       } catch (err) {
         console.log(`There was an error adding player`, err);
       }
-    }
+    },
+    async joinGame({ commit, dispatch, rootState }, gameId) {
+      try {
+        const playerId = rootState.user.playerId;
+        await makeCall('patch', `/game/${gameId}`, { player_id: playerId });
+        dispatch('fetchGame', gameId);
+      } catch (err) {
+        console.log(`There was an error joining the game`, err);
+      }
+    } 
   },
 
   role: {
@@ -81,25 +106,19 @@ export default {
     setGames(state, games) {
       state.games = [];
       games.forEach(game => {
-        const date = new Date(game.date_created);
-        const tzOffset = date.getTimezoneOffset() * 60000;
-        const time = date.getTime();
-        game.date_created = new Date(time - tzOffset).toLocaleString();
-        state.games.push(game);
+        state.games.push(formatGameDate(game));
       });
     },
-    selectPlayer(state, player) {
-      
-      
-      
-    }
+    updateGames(state, game) {
+      const gameIndex = state.games.map(g => g.id).indexOf(game.id);
+      state.games.splice(gameIndex, 1, formatGameDate(game));
+    },
   },
   actions: {
     ...apiActions.game,
     ...apiActions.player,
     ...apiActions.role,
     selectPlayer({ commit, state }, playerId) {
-      
       storeLocal({ id: playerId });
       const player = state.players.find(p => p.id === playerId);
       commit('user/setUser', player, { root: true });

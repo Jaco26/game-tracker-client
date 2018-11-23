@@ -7,5 +7,5 @@ const api = axios.create({
 export function makeCall(method, url, payload) {
   return api[method](url, payload)
     .then(res => res.data)
-    .catch(err => err);
+    .catch(err => err)
 }

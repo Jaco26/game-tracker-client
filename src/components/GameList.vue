@@ -80,8 +80,7 @@ export default {
       this.$store.dispatch('setup/deleteGame', gameId);
     },
     joinGame(gameId) {
-      console.log('Hey! Let\'s join game', gameId);
-      
+      this.$store.dispatch('setup/joinGame', gameId);
     }
   }
 }
