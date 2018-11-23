@@ -38,8 +38,8 @@ export default {
   },
   methods: {
     selectPlayer(playerId) {
-      console.log(`I choose player ${playerId}`);
-      
+      // console.log(`I choose player ${playerId}`);
+      this.$store.dispatch('setup/selectPlayer', playerId);
     }
   }
 };

@@ -1,6 +1,11 @@
 import  { makeCall }  from '@/api/index';
 
-const actions = {
+
+function storeLocal(obj) {
+  localStorage.setItem('player', JSON.stringify(obj));
+}
+
+const apiActions = {
   game: {
     async fetchGames({ commit }) {
       try {
@@ -83,10 +88,21 @@ export default {
         state.games.push(game);
       });
     },
+    selectPlayer(state, player) {
+      
+      
+      
+    }
   },
   actions: {
-    ...actions.game,
-    ...actions.player,
-    ...actions.role,
+    ...apiActions.game,
+    ...apiActions.player,
+    ...apiActions.role,
+    selectPlayer({ commit, state }, playerId) {
+      
+      storeLocal({ id: playerId });
+      const player = state.players.find(p => p.id === playerId);
+      commit('user/setUser', player, { root: true });
+    }
   },
 };
