@@ -1,10 +1,6 @@
 import  { makeCall }  from '@/api/index';
 
 
-function storeLocal(obj) {
-  localStorage.setItem('player', JSON.stringify(obj));
-}
-
 function formatGameDate(game) {
   const date = new Date(game.date_created);
   const tzOffset = date.getTimezoneOffset() * 60000;
@@ -119,7 +115,6 @@ export default {
     ...apiActions.player,
     ...apiActions.role,
     selectPlayer({ commit, state }, playerId) {
-      storeLocal({ id: playerId });
       const player = state.players.find(p => p.id === playerId);
       commit('user/setUser', player, { root: true });
     }

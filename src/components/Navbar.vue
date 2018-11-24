@@ -9,11 +9,11 @@
 
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
-
+      <h2></h2>
       <b-nav-item-dropdown right>
         <!-- Using button-content slot -->
         <template slot="button-content">
-          <em>User</em>
+          <em>{{$store.state.user.name}}</em>
         </template>
         <b-dropdown-item href="#">Profile</b-dropdown-item>
         <b-dropdown-item @click="$store.commit('user/logout')">Signout</b-dropdown-item>
