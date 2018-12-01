@@ -17,7 +17,7 @@
               <app-game-list-details :game="item"></app-game-list-details>
             </div>
             <div v-else>
-              Player Details
+              <app-player-list-details :player="item"></app-player-list-details>
             </div>
           </div>
         </b-card>
@@ -29,9 +29,11 @@
 <script>
 import { bindState } from '@/store';
 import appGameListDetails from './GameListDetails';
+import appPlayerListDetails from './PlayerListDetails';
 export default {
   components: {
     appGameListDetails,
+    appPlayerListDetails,
   },
   props: {
     itemsName: {
@@ -62,11 +64,16 @@ export default {
       this.show === itemId ? this.show = null : this.show = itemId;
     },
     deleteGame(itemId) {
-      const dataType = this.itemsName === 'players' ? 'player' : 'game';
-      const confirm = window.confirm(`Are you sure? All ${dataType} data will be lost!`);
-      if (confirm) {
-        this.$store.dispatch(this.deleteActionType, itemId);
+      if (this.$store.getters['admin/isAdmin']) {
+        const dataType = this.itemsName === 'players' ? 'player' : 'game';
+        const confirm = window.confirm(`Are you sure? All ${dataType} data will be lost!`);
+        if (confirm) {
+          this.$store.dispatch(this.deleteActionType, itemId);
+        }
+      } else {
+        alert('You are not authorized!')
       }
+      
     },
   },
 }
