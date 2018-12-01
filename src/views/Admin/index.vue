@@ -21,7 +21,7 @@
     </b-col>
     <b-col cols="12">
       <b-col cols="12" sm="10" offset-sm="1">
-        <app-game-list></app-game-list>
+        <app-game-table></app-game-table>
       </b-col>
     </b-col>
   </b-row>
@@ -29,10 +29,10 @@
 
 <script>
 import { bindState } from '@/store';
-import appGameList from '@/components/GameList';
+import appGameTable from './GameTable';
 export default {
   components: {
-    appGameList
+    appGameTable
   },
   computed: {
     ...bindState('setup', [

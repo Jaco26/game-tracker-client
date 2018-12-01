@@ -98,7 +98,7 @@ const apiActions = {
       try {
         const playerId = rootState.user.playerId;
         await makeCall('post', `/game/${gameId}/join`, { player_id: playerId });
-        commit('user/setState', { key: 'gameId', data: gameId }, { root: true });
+        commit('user/setState', { key: 'gameId', data: gameId }, { root: true })
         dispatch('fetchGame', gameId);
       } catch (err) {
         console.log(`There was an error joining the game`, err);
@@ -107,7 +107,7 @@ const apiActions = {
     async chooseRole({ commit, rootState }, roleId) {
       try {
         const { playerId, gameId } = rootState.user;
-        const result = await makeCall('put', `/game/${gameId}/role`, { player_id: playerId, role_id: roleId})
+        const result = await makeCall('put', `/game/${gameId}/role`, { player_id: playerId, role_id: roleId});
         console.log('chose role result');
         
       } catch (err) {

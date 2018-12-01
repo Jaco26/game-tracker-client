@@ -19,13 +19,13 @@
             </b-form-group>
           </b-form>
           <h3>Been Here Before?</h3>
-          <app-player-list></app-player-list>
+          <!-- <app-player-list></app-player-list> -->
         </b-tab>
         <b-tab :disabled="!playerId" title="Join Game">
-          <app-game-list></app-game-list>
+          <!-- <app-game-list></app-game-list> -->
         </b-tab>
         <b-tab :disabled="!gameId" title="Choose Role">
-          <app-role-list></app-role-list>
+          <!-- <app-role-list></app-role-list> -->
         </b-tab>
         <!-- <b-tab @click="$store.dispatch('setup/gamePlayerRole')" title="GPR"></b-tab> -->
       </b-tabs>
@@ -35,14 +35,14 @@
 
 <script>
 import { bindState } from '@/store';
-import appPlayerList from '@/components/PlayerList'
-import appGameList from '@/components/GameList';
-import appRoleList from '@/components/RoleList';
+// import appPlayerList from '@/components/PlayerList'
+// import appGameList from '@/components/GameList';
+// import appRoleList from '@/components/RoleList';
 export default {
   components: {
-    appPlayerList,
-    appGameList,
-    appRoleList,
+    // appPlayerList,
+    // appGameList,
+    // appRoleList,
   },
   computed: {
     ...bindState('setup', [
