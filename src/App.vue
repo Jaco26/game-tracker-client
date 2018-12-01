@@ -60,4 +60,8 @@ html, body {
   opacity: 0;
 }
 
+.delete:hover {
+  color: red !important;
+}
+
 </style>

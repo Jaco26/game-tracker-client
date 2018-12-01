@@ -2,7 +2,7 @@
   <b-row class="justify-content-sm-center">
     <b-col sm="10">
       <b-tabs  card v-model="tabIndex">
-        <b-tab title="Register">
+        <b-tab title="Register Player">
           <b-form @submit.prevent="onSubmit" @reset="onReset" autocomplete="off">
             <b-form-group
               label="Enter your name"
@@ -21,13 +21,16 @@
           <h3>Been Here Before?</h3>
           <!-- <app-player-list></app-player-list> -->
         </b-tab>
-        <b-tab :disabled="!playerId" title="Join Game">
-          <!-- <app-game-list></app-game-list> -->
+        
+        <b-tab title="Register Game">
+          Register Game
+          <app-game-list></app-game-list>
         </b-tab>
-        <b-tab :disabled="!gameId" title="Choose Role">
-          <!-- <app-role-list></app-role-list> -->
+        
+        <b-tab title="Choose Game Players">
+          Choose Game Players
         </b-tab>
-        <!-- <b-tab @click="$store.dispatch('setup/gamePlayerRole')" title="GPR"></b-tab> -->
+
       </b-tabs>
     </b-col>
   </b-row>
@@ -36,12 +39,12 @@
 <script>
 import { bindState } from '@/store';
 // import appPlayerList from '@/components/PlayerList'
-// import appGameList from '@/components/GameList';
+import appGameList from '@/components/GameList';
 // import appRoleList from '@/components/RoleList';
 export default {
   components: {
     // appPlayerList,
-    // appGameList,
+    appGameList,
     // appRoleList,
   },
   computed: {

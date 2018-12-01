@@ -21,7 +21,7 @@
           &times;
         </b-button>
         <b-button 
-          v-if="$route.name === 'login'"
+          v-if="$route.name === 'setup'"
           @click="joinGame(row.item.id)" 
           variant="info"
           size="sm"

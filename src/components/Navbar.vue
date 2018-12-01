@@ -4,7 +4,7 @@
 
     <b-navbar-nav>
       <b-nav-item exact :to="{ name: 'home' }">Home</b-nav-item>
-      <b-nav-item exact :to="{ name: 'login' }">Login</b-nav-item>
+      <b-nav-item exact :to="{ name: 'setup' }">Setup</b-nav-item>
     </b-navbar-nav>
 
     <!-- Right aligned nav items -->
