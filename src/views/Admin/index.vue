@@ -13,6 +13,7 @@
             <b-form-input
               id="new-game"
               v-model.trim="newGame"
+              size="lg"
               placeholder="Enter game name"
             ></b-form-input>
           </b-form-group>

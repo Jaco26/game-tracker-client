@@ -1,30 +1,18 @@
 <template>
   <b-row class="justify-content-sm-center">
     <b-col sm="10">
-      <b-tabs  card v-model="tabIndex">
+      <b-tabs card v-model="tabIndex">
         <b-tab title="Register Player">
-          <b-form @submit.prevent="onSubmit" @reset="onReset" autocomplete="off">
-            <b-form-group
-              label="Enter your name"
-              label-for="new-player"
-            >
-              <b-form-input
-                id="new-player"
-                v-model.trim="newPlayer"
-                placeholder="Enter your name"
-              ></b-form-input>
-              <b-form-text>
-                You must enter a unique name; one that doesn't appear below.
-              </b-form-text>
-            </b-form-group>
-          </b-form>
-          <h3>Been Here Before?</h3>
-          <!-- <app-player-list></app-player-list> -->
+          <app-new-player-form></app-new-player-form>
+          <h3>Players</h3>
+          <app-setup-item-list itemsName="players"></app-setup-item-list>
         </b-tab>
         
         <b-tab title="Register Game">
-          Register Game
-          <app-game-list></app-game-list>
+          <app-new-game-form></app-new-game-form>
+          <hr>
+          <h3>Games:</h3>
+          <app-setup-item-list itemsName="games"></app-setup-item-list>
         </b-tab>
         
         <b-tab title="Choose Game Players">
@@ -38,14 +26,14 @@
 
 <script>
 import { bindState } from '@/store';
-// import appPlayerList from '@/components/PlayerList'
-import appGameList from '@/components/GameList';
-// import appRoleList from '@/components/RoleList';
+import appSetupItemList from '@/components/SetupItemList'
+import appNewPlayerForm from '@/components/NewPlayerForm';
+import appNewGameForm from '@/components/NewGameForm';
 export default {
   components: {
-    // appPlayerList,
-    appGameList,
-    // appRoleList,
+    appSetupItemList,
+    appNewPlayerForm,
+    appNewGameForm,
   },
   computed: {
     ...bindState('setup', [
