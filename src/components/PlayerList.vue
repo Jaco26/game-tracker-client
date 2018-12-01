@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     selectPlayer(playerId) {
-      this.$store.dispatch('setup/selectPlayer', playerId);
+      this.$store.dispatch('setup/fetchPlayer', playerId);
     }
   }
 };

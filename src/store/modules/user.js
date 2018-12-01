@@ -5,6 +5,7 @@ function initialState() {
     name: '',
     roleId: null,
     gameId: null,
+    playerInstances: [],
   }
   const session = JSON.parse(localStorage.getItem('player'));
   if (session) {
@@ -25,6 +26,7 @@ export default {
       }));
       state.playerId = payload.id;
       state.name = payload.name;
+      state.playerInstances = payload.player_instances;
     },
     logout(state) {
       localStorage.clear();

@@ -25,8 +25,9 @@
           <app-game-list></app-game-list>
         </b-tab>
         <b-tab :disabled="!gameId" title="Choose Role">
-          
+          <app-role-list></app-role-list>
         </b-tab>
+        <!-- <b-tab @click="$store.dispatch('setup/gamePlayerRole')" title="GPR"></b-tab> -->
       </b-tabs>
     </b-col>
   </b-row>
@@ -36,10 +37,12 @@
 import { bindState } from '@/store';
 import appPlayerList from '@/components/PlayerList'
 import appGameList from '@/components/GameList';
+import appRoleList from '@/components/RoleList';
 export default {
   components: {
     appPlayerList,
     appGameList,
+    appRoleList,
   },
   computed: {
     ...bindState('setup', [

@@ -47,7 +47,7 @@ const apiActions = {
     },
   },
 
-  player: {
+  players: {
     async fetchPlayers({ commit }) {
       try {
         const result = await makeCall('get', '/players');
@@ -66,18 +66,58 @@ const apiActions = {
         console.log(`There was an error adding player`, err);
       }
     },
+
+  },
+
+  player: {
+    async fetchPlayer({ commit }, playerId) {
+      try {
+        const result = await makeCall('get', `/player/${playerId}`);
+        commit('user/setUser', result, { root: true })  
+      } catch (err) {
+        console.log('There was an error getting the player', err);
+      }
+    },
+    async updatePlayerName({ dispatch }, { playerId, name }) {
+      try {
+        await makeCall('put', `/player/${playerId}`, { name });
+        dispatch('fetchPlayers');
+      } catch (err) {
+        console.log(`There was an error updating the player name`, err);
+      }
+    },
+    async deletePlayer({ dispatch }, playerId) {
+      try {
+        await makeCall('delete', `/player/${playerId}`);
+        dispatch('fetchPlayers');
+      } catch (err) {
+        console.log(`There was an error deleting the player`, err);
+      }
+    },
     async joinGame({ commit, dispatch, rootState }, gameId) {
       try {
         const playerId = rootState.user.playerId;
-        await makeCall('patch', `/game/${gameId}`, { player_id: playerId });
+        await makeCall('post', `/game/${gameId}/join`, { player_id: playerId });
+        commit('user/setState', { key: 'gameId', data: gameId }, { root: true });
         dispatch('fetchGame', gameId);
       } catch (err) {
         console.log(`There was an error joining the game`, err);
       }
-    } 
+    },
+    async chooseRole({ commit, rootState }, roleId) {
+      try {
+        const { playerId, gameId } = rootState.user;
+        const result = await makeCall('put', `/game/${gameId}/role`, { player_id: playerId, role_id: roleId})
+        console.log('chose role result');
+        
+      } catch (err) {
+        console.log('There was an error choosing a role.');
+      }
+    },
   },
 
-  role: {
+
+  roles: {
     async fetchRoles({ commit }) {
       try {
         const result = await makeCall('get', '/roles');
@@ -85,9 +125,9 @@ const apiActions = {
       } catch (err) {
         console.log(`There was an error getting all roles`, err);
       }
-    }
-  }
-}
+    },
+  },
+};
 
 
 export default {
@@ -112,11 +152,12 @@ export default {
   },
   actions: {
     ...apiActions.game,
+    ...apiActions.players,
     ...apiActions.player,
-    ...apiActions.role,
-    selectPlayer({ commit, state }, playerId) {
-      const player = state.players.find(p => p.id === playerId);
-      commit('user/setUser', player, { root: true });
-    }
+    ...apiActions.roles,
+    // selectPlayer({ commit, state }, playerId) {
+    //   const player = state.players.find(p => p.id === playerId);
+    //   commit('user/setUser', player, { root: true });
+    // }
   },
 };
