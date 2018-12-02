@@ -1,23 +1,41 @@
 <template>
   <b-row class="justify-content-sm-center">
-    <b-col sm="10">
+    <b-col sm="11">
       <b-tabs card v-model="tabIndex">
-        <b-tab title="Register Player">
+        <b-tab title="Players">
           <app-new-player-form></app-new-player-form>
           <h3>Players</h3>
           <app-setup-item-list itemsName="players"></app-setup-item-list>
         </b-tab>
         
-        <b-tab title="Register Game">
+        <b-tab title="Games">
           <app-new-game-form></app-new-game-form>
           <hr>
           <h3>Games:</h3>
-          <app-setup-item-list itemsName="games"></app-setup-item-list>
+          <app-setup-item-list itemsName="games">
+           <div slot="custom-controls" slot-scope="item">
+             <b-button size="sm" @click="registerPlayers(item.id)">Add Players</b-button>
+           </div>
+          </app-setup-item-list>
         </b-tab>
         
-        <b-tab title="Choose Game Players">
+        <!-- <b-tab title="Choose Game Players">
           Choose Game Players
-        </b-tab>
+          <b-row>
+            <b-col cols="sm-4">
+              <h2>Players</h2>
+              <app-setup-item-list itemsName="players"></app-setup-item-list>
+            </b-col>
+            <b-col cols="sm-4">
+              <h2>Games</h2>
+              <app-setup-item-list itemsName="games"></app-setup-item-list>
+            </b-col>
+            <b-col cols="sm-4">
+              <h2>Roles</h2>
+              <app-setup-item-list itemsName="roles"></app-setup-item-list>
+            </b-col>
+          </b-row>
+        </b-tab> -->
 
       </b-tabs>
     </b-col>
@@ -46,18 +64,19 @@ export default {
   },
   data() {
     return {
-      tabIndex: 0,
+      tabIndex: 1,
     }
   },
   methods: {
-    onReset() {
-      this.newPlayer = '';
-    },
     onSubmit() {
       if (this.newPlayer) {
         this.$store.dispatch('setup/addPlayer');
       }
     },
+    registerPlayers(gameId) {
+      console.log(gameId);
+      
+    }
   },
 }
 </script>

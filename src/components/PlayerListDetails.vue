@@ -1,7 +1,6 @@
 <template>
   <b-row>
     <b-col>
-      <h4>Player Games:</h4>
       <pre>
         {{player}}
       </pre>

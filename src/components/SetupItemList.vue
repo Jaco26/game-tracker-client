@@ -5,9 +5,10 @@
         <b-card :no-body="show !== item.id">
           <b-row slot="header">
             <b-col class="d-flex justify-content-between align-items-center">
-              <h3>{{item.name}}</h3>
-              <div>
-                <b-button variant="info" size="sm" @click="toggleDetails(item.id)">Details</b-button>
+              <h5>{{item.name}}</h5>
+              <div class="d-flex align-items-center">
+                <slot name="custom-controls" :id="item.id"></slot>
+                <b-button class="ml-3" variant="info" size="sm" @click="toggleDetails(item.id)">{{show === item.id ? 'Hide' : 'Details'}}</b-button>
                 <b-button-close class="ml-3 delete" @click="deleteGame(item.id)"></b-button-close>
               </div>
             </b-col>
@@ -16,8 +17,14 @@
             <div v-if="itemsName === 'games'">
               <app-game-list-details :game="item"></app-game-list-details>
             </div>
-            <div v-else>
+            <div v-else-if="itemsName === 'players'">
               <app-player-list-details :player="item"></app-player-list-details>
+            </div>
+            <div v-else-if="itemsName === 'roles'">
+              Role details
+            </div>
+            <div v-else>
+              Sorry, I don't know where to find "{{itemsName}}".
             </div>
           </div>
         </b-card>
@@ -71,7 +78,7 @@ export default {
           this.$store.dispatch(this.deleteActionType, itemId);
         }
       } else {
-        alert('You are not authorized!')
+        alert('You are not authorized to delete this item!'.toUpperCase())
       }
       
     },
