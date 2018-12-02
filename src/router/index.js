@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import Admin from '@/views/Admin/index'
 import Setup from '@/views/Setup/index'
 import Home from '@/views/Home/index'
+import AddGamePlayers from '@/views/AddGamePlayers/index'
 import PageNotFound from '@/views/PageNotFound'
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ const router = new Router({
       component: Setup,
     },
     {
+      path: '/add-game-players/:gameId',
+      name: 'addGamePlayers',
+      component: AddGamePlayers,
+    },
+    {
       path: '/super-secret/admin',
       name: 'admin',
       component: Admin,
@@ -35,19 +41,5 @@ const router = new Router({
   ]
 });
 
-
-router.beforeEach((to, from, next) => {
-  if (to.name === 'setup' || to.name === 'admin') {
-    next();
-  } else if (store.state.user.gameId) {
-    next();
-  } else {
-    next({
-      name: 'setup',
-      replace: true,
-    });
-  }
-  // next();
-});
 
 export default router;

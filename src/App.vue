@@ -1,9 +1,13 @@
 <template>
   <b-container class="align-items-center px-0" fluid id="app">
     <app-navbar></app-navbar>
-    <transition name="route-fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <b-row class="justify-content-center">
+      <b-col cols="sm-11">
+        <transition name="route-fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 

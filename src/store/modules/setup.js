@@ -5,7 +5,7 @@ function formatGameDate(game) {
   const date = new Date(game.date_created);
   const tzOffset = date.getTimezoneOffset() * 60000;
   const time = date.getTime();
-  game.date_created = new Date(time - tzOffset).toLocaleString();
+  game.date_created = new Date(time - tzOffset).toLocaleDateString();
   return game;
 }
 
@@ -134,6 +134,7 @@ export default {
   state: {
     roles: [], // list of all player roles
     games: [], // list of all previously registered games
+    selectedGameId: '',
     newGame: '', 
     players: [], // list of all previously registered players
     newPlayer: '',
@@ -160,4 +161,7 @@ export default {
     //   commit('user/setUser', player, { root: true });
     // }
   },
+  getters: {
+    selectedGame: state => state.games.find(g => g.id == state.selectedGameId),
+  }
 };

@@ -13,18 +13,20 @@
               </div>
             </b-col>
           </b-row>
-          <div v-if="item.id === show">
-            <div v-if="itemsName === 'games'">
-              <app-game-list-details :game="item"></app-game-list-details>
-            </div>
-            <div v-else-if="itemsName === 'players'">
-              <app-player-list-details :player="item"></app-player-list-details>
-            </div>
-            <div v-else-if="itemsName === 'roles'">
-              Role details
-            </div>
-            <div v-else>
-              Sorry, I don't know where to find "{{itemsName}}".
+          <div>
+            <div v-if="item.id === show">
+              <div v-if="itemsName === 'games'">
+                <app-game-list-details :game="item"></app-game-list-details>
+              </div>
+              <div v-else-if="itemsName === 'players'">
+                <app-player-list-details :player="item"></app-player-list-details>
+              </div>
+              <div v-else-if="itemsName === 'roles'">
+                Role details
+              </div>
+              <div v-else>
+                Sorry, I don't know where to find "{{itemsName}}".
+              </div>
             </div>
           </div>
         </b-card>

@@ -1,6 +1,6 @@
 <template>
   <b-row class="justify-content-sm-center">
-    <b-col sm="11">
+    <b-col >
       <b-tabs card v-model="tabIndex">
         <b-tab title="Players">
           <app-new-player-form></app-new-player-form>
@@ -14,29 +14,11 @@
           <h3>Games:</h3>
           <app-setup-item-list itemsName="games">
            <div slot="custom-controls" slot-scope="item">
-             <b-button size="sm" @click="registerPlayers(item.id)">Add Players</b-button>
+             <b-button size="sm" :to="{ name: 'addGamePlayers', params: { gameId: item.id } }">Add Players</b-button>
            </div>
           </app-setup-item-list>
         </b-tab>
         
-        <!-- <b-tab title="Choose Game Players">
-          Choose Game Players
-          <b-row>
-            <b-col cols="sm-4">
-              <h2>Players</h2>
-              <app-setup-item-list itemsName="players"></app-setup-item-list>
-            </b-col>
-            <b-col cols="sm-4">
-              <h2>Games</h2>
-              <app-setup-item-list itemsName="games"></app-setup-item-list>
-            </b-col>
-            <b-col cols="sm-4">
-              <h2>Roles</h2>
-              <app-setup-item-list itemsName="roles"></app-setup-item-list>
-            </b-col>
-          </b-row>
-        </b-tab> -->
-
       </b-tabs>
     </b-col>
   </b-row>
@@ -74,8 +56,8 @@ export default {
       }
     },
     registerPlayers(gameId) {
-      console.log(gameId);
-      
+      console.log(gameId, this.$router);
+      this.$router.push();
     }
   },
 }
