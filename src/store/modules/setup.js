@@ -13,7 +13,7 @@ const apiActions = {
   game: {
     async fetchGames({ commit }) {
       try {
-        const result = await makeCall('get', '/games');
+        const result = await makeCall('get', '/games');        
         commit('setGames', result.games);
       } catch (err) {
         console.log(err);
@@ -94,9 +94,9 @@ const apiActions = {
         console.log(`There was an error deleting the player`, err);
       }
     },
-    async joinGame({ commit, dispatch, rootState }, gameId) {
+    async joinGame({ commit, dispatch, state }, { playerId }) {
       try {
-        const playerId = rootState.user.playerId;
+        const gameId = state.selectedGameId;
         await makeCall('post', `/game/${gameId}/join`, { player_id: playerId });
         commit('user/setState', { key: 'gameId', data: gameId }, { root: true })
         dispatch('fetchGame', gameId);
