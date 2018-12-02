@@ -32,7 +32,7 @@
 
         <app-game-player-list 
           :selectedRoleIds="selectedRoleIds" 
-          :gamePlayers="gamePlayers"
+          :gamePlayerInstances="gamePlayers"
         ></app-game-player-list>
 
       </b-col>
@@ -57,7 +57,7 @@ export default {
       return this.$store.getters['setup/selectedGame'];
     },
     gamePlayers() {
-      return this.game.game_players.reduce((a, b) => {
+      const players = this.game.game_players.reduce((a, b) => {
         a.push({
           id: b.id, // player_instance id
           name: b.player.name,
@@ -66,6 +66,7 @@ export default {
         });
         return a;
       }, []);
+      return players.sort((a, b) => a.name > b.name ? 1 : -1);
     },
     selectedRoleIds() {
       return this.game.game_players.reduce((a, gp) => {
