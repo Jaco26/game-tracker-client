@@ -12,7 +12,8 @@
               <h4>{{playerInstance.name}}</h4>
             </b-col>
             <b-col class="text-right">
-              <b-dropdown size="sm" text="Choose Role" boundary="viewport">
+              <b-button class="mx-2" size="sm" variant="warning" @click="leaveGame(playerInstance.playerId, playerInstance.id)">Leave Game</b-button>
+              <b-dropdown size="sm" variant="info" text="Choose Role" boundary="viewport">
                 <b-dropdown-item 
                   v-for="role in $store.state.setup.roles"
                   :key="role.id"
@@ -50,6 +51,11 @@ export default {
       required: true,
     },
   },
+  methods: {
+    leaveGame(playerId, playerInstanceId) {
+      this.$store.dispatch('setup/leaveGame', { playerId, playerInstanceId })
+    }
+  }
 }
 </script>
 

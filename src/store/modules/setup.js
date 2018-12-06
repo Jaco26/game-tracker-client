@@ -98,10 +98,19 @@ const apiActions = {
       try {
         const gameId = state.selectedGameId;
         await makeCall('post', `/game/${gameId}/join`, { player_id: playerId });
-        commit('user/setState', { key: 'gameId', data: gameId }, { root: true })
         dispatch('fetchGame', gameId);
+        dispatch('fetchPlayer', playerId);
       } catch (err) {
         console.log(`There was an error joining the game`, err);
+      }
+    },
+    async leaveGame({ dispatch, state }, { playerId, playerInstanceId }) {
+      try {
+        await makeCall('put', `/game/${state.selectedGameId}/join`, { instance_id: playerInstanceId });
+        dispatch('fetchGame', state.selectedGameId);
+        dispatch('fetchPlayer', playerId);
+      } catch (err) {
+        console.log(`There was an error leaving the game`, err);
       }
     },
     async chooseRole({ dispatch, state }, { roleId, playerId }) {

@@ -21,7 +21,7 @@
         <div class="d-flex justify-content-between">
           <h2>Players</h2>
           <div>
-            <b-dropdown boundary="viewport" text="Add Players">
+            <b-dropdown variant="primary" boundary="viewport" text="Add Players">
               <b-dropdown-header v-if="notJoinedPlayers.length === 0">All players have joined this game</b-dropdown-header>
               <b-dropdown-item 
                 v-for="p in notJoinedPlayers" 
