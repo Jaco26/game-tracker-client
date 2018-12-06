@@ -70,7 +70,11 @@ export default {
   },
   methods: {
     toggleDetails(itemId) {
-      this.show === itemId ? this.show = null : this.show = itemId;
+      if (this.itemsName === 'players') {
+        this.show === itemId ? this.show = null : this.show = itemId;
+      } else {
+        this.$router.push({ name: 'addGamePlayers', params: { gameId: itemId } })
+      }
     },
     deleteGame(itemId) {
       if (this.$store.getters['admin/isAdmin']) {

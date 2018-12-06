@@ -27,10 +27,11 @@
           </b-row>
           <b-row>
             <b-col>
-              <h5 class="d-inline">Role:</h5>
-              &nbsp;
-              <span v-if="playerInstance.role">{{playerInstance.role.name}}</span>
-              <span v-else>None</span>
+              <span v-if="playerInstance.role"><strong><i>{{playerInstance.role.name}}</i></strong></span>
+              <span v-else>No Role Assigned</span>
+              <div v-if="playerInstance.role">
+                {{playerInstance.role.description}}
+              </div>
             </b-col>
           </b-row>
         </b-card>

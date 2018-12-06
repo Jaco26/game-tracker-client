@@ -12,11 +12,7 @@
           <app-new-game-form></app-new-game-form>
           <hr>
           <h3>Games:</h3>
-          <app-setup-item-list itemsName="games">
-           <div slot="custom-controls" slot-scope="item">
-             <b-button size="sm" :to="{ name: 'addGamePlayers', params: { gameId: item.id } }">Add Players</b-button>
-           </div>
-          </app-setup-item-list>
+          <app-setup-item-list itemsName="games"></app-setup-item-list>
         </b-tab>
         
       </b-tabs>
